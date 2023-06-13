@@ -1,0 +1,132 @@
+body {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.navbar {
+  background-color: #defafa;
+}
+
+.columna-izquierda {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.columna-derecha {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.odontologo-box {
+  text-align: center;
+  padding: 20px;
+  background-color: white;
+  width: 1000px;
+  height: 1100px;
+}
+
+.crear-tareas-box {
+  background-color: #fff;
+  padding: 200px;
+  text-align: center;
+  width: 910px;
+  height: 1100px; /* Altura total de la ventana menos la suma de la altura del navbar y el footer */
+  position: relative;
+}
+
+
+.botones-tarea {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin-bottom: 10px;
+}
+
+#editar-tarea-btn,
+#eliminar-tarea-btn,
+#crear-tarea-btn {
+  margin-bottom: 10px;
+  margin-left: 10px;
+}
+
+.crear-tarea-cuadro {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 300px;
+  background-color: rgb(221, 250, 251);
+  padding: 20px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.oculto {
+  display: none;
+}
+
+.tarea {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+}
+
+.numero-tarea {
+  font-weight: bold;
+  margin-right: 10px;
+  padding: 5px;
+  border: 1px solid #000;
+  border-radius: 50%;
+}
+
+.contenido-tarea {
+  flex-grow: 1;
+}
+
+.titulo-tarea {
+  font-weight: bold;
+}
+
+.descripcion-tarea {
+  margin-top: 5px;
+}
+
+.tarea-rectangulo {
+  background-color: #f0f0f0;
+  padding: 10px;
+  border-radius: 5px;
+  overflow: auto;
+}
+
+.container {
+  flex-grow: 1;
+  display: flex;
+  align-items: stretch;
+}
+
+
+/* Estilos para el Footer */
+
+footer {
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  padding: 10px 0;
+}
+
+footer p {
+  color: #fff;
+  margin: 0;
+}
+
+.body-background {
+  background-color: #f1f7f8;
+}

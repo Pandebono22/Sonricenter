@@ -1,0 +1,53 @@
+html {
+    position: relative;
+    min-height: 100%;
+  }
+  
+  body {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  
+  .body-background {
+    background-color: #f1f7f8;
+  }
+  
+  .navbar {
+    background-color: #defafa;
+  }
+  
+  #calendar {
+    margin-bottom: 20px;
+  }
+  
+  #citas-container {
+    flex: 1; /* Ocupa el espacio restante */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+  }
+  
+  #citas-content {
+    background-color: #fff;
+    border-radius: 10px;
+    width: 500px;
+    height: 1100px;
+    align-items: center;
+    display: flex;
+  }
+  
+  footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+    margin-top: auto; /* Alinea el footer al final de la página */
+  }
+  
+  footer p {
+    color: #fff;
+    margin: 0;
+  }

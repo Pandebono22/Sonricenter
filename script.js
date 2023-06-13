@@ -1,32 +1,34 @@
-// Obtén la referencia al elemento del carrusel
+ // Obtén la referencia al elemento del carrusel
 const carousel = document.querySelector('#carouselExampleIndicators');
 
-// Agrega un evento 'mouseover' a las flechas del carrusel
-const carouselControls = carousel.querySelectorAll('.carousel-control-prev, .carousel-control-next');
-carouselControls.forEach(control => {
-  control.addEventListener('mouseover', () => {
-    // Agrega la clase 'cube-transition' al carrusel al pasar el mouse por encima de las flechas
-    carousel.classList.add('cube-transition');
+// Verificar si el elemento del carrusel existe antes de continuar
+if (carousel) {
+  // Agrega un evento 'mouseover' a las flechas del carrusel
+  const carouselControls = carousel.querySelectorAll('.carousel-control-prev, .carousel-control-next');
+  carouselControls.forEach(control => {
+    control.addEventListener('mouseover', () => {
+      // Agrega la clase 'cube-transition' al carrusel al pasar el mouse por encima de las flechas
+      carousel.classList.add('cube-transition');
+    });
+
+    control.addEventListener('mouseout', () => {
+      // Remueve la clase 'cube-transition' del carrusel al quitar el mouse de las flechas
+      carousel.classList.remove('cube-transition');
+    });
   });
 
-  control.addEventListener('mouseout', () => {
-    // Remueve la clase 'cube-transition' del carrusel al quitar el mouse de las flechas
-    carousel.classList.remove('cube-transition');
+  // Agregar evento al pasar el cursor por encima de las flechas
+  carousel.addEventListener('mouseenter', function() {
+    this.classList.add('carousel-hover');
   });
-});
 
-// Agregar evento al pasar el cursor por encima de las flechas
-carousel.addEventListener('mouseenter', function() {
-  this.classList.add('carousel-hover');
-});
+  // Agregar evento al retirar el cursor de las flechas
+  carousel.addEventListener('mouseleave', function() {
+    this.classList.remove('carousel-hover');
+  });
+}
 
-// Agregar evento al retirar el cursor de las flechas
-carousel.addEventListener('mouseleave', function() {
-  this.classList.remove('carousel-hover');
-});
-
-// Agregar funcionalidad al boton de ver más
-
+// Agregar funcionalidad al botón de ver más
 function openModal(service) {
   var modal = document.getElementById('modal-info');
   var title = modal.querySelector('.modal-title');
@@ -62,19 +64,75 @@ function openModal(service) {
     info.textContent = 'La ortodoncia es fundamental para corregir problemas de mordida, maloclusiones y problemas estéticos relacionados con la posición de los dientes. Los ortodoncistas realizan un diagnóstico preciso y diseñan planes de tratamiento personalizados para cada paciente, utilizando técnicas avanzadas y aparatos ortodónticos específicos. Los tratamientos pueden durar desde unos pocos meses hasta varios años, dependiendo de la complejidad del caso.';
   }
 
-  modal.style.display = 'block';
+   modal.style.display = 'block';
 }
-
 
 function closeModal() {
   var modal = document.getElementById('modal-info');
   modal.style.display = 'none';
 }
 
-window.onclick = function(event) {
-  var modal = document.getElementById("modal-info");
-  if (event.target == modal) {
-    modal.style.display = "block";
-  modal.classList.add("fade-in");
+window.addEventListener('click', function(event) {
+  var modal = document.getElementById('modal-info');
+  if (event.target === modal) {
+    modal.style.display = 'none';
+    modal.classList.add('fade-in');
   }
-}
+});
+
+$(document).ready(function() {
+  // Manejar el evento click del botón "Enviar"
+  $("#enviar-cita-btn").click(function(event) {
+    event.preventDefault(); // Evitar el comportamiento predeterminado del botón de enviar
+
+    // Obtener los datos del formulario
+    var formData = $("#formulario-cita").serialize();
+
+    // Enviar la solicitud Ajax al archivo "Database.php"
+    $.ajax({
+      url: "Database.php",
+      type: "POST",
+      data: formData,
+      success: function(response) {
+        // Manejar la respuesta del servidor
+        alert(response); // Puedes mostrar una notificación o realizar cualquier otra acción aquí
+        $("#formulario-cita")[0].reset(); // Reiniciar el formulario si es necesario
+      },
+      error: function(xhr, status, error) {
+        // Manejar errores de la solicitud Ajax
+        console.log("Error en la solicitud Ajax:", error);
+      }
+    });
+  });
+});
+
+
+
+$(document).ready(function() {
+  $('#login-form').submit(function(event) {
+    event.preventDefault(); // Evita que el formulario se envíe automáticamente
+
+    // Obtener los valores de correo y contraseña
+    var correo = $('#correo').val();
+    var contraseña = $('#contraseña').val();
+
+    // Verificar las credenciales en la base de datos
+    $.ajax({
+      url: 'inicioSesion.php', // Cambiar el nombre del archivo PHP si es necesario
+      method: 'POST',
+      data: { correo: correo, contraseña: contraseña },
+      success: function(response) {
+        if (response === 'success') {
+          // Credenciales correctas, enviar el formulario para redireccionar a tareas.html
+          $('#login-form').unbind('submit').submit();
+        } else {
+          // Credenciales incorrectas, mostrar mensaje de error
+          alert('Credenciales incorrectas');
+        }
+      },
+      error: function() {
+        alert('Error en la solicitud Ajax');
+      }
+    });
+  });
+});
